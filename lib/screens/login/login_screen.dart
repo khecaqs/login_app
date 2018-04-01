@@ -7,11 +7,9 @@ import 'package:login_app/screens/login/login_screen_presenter.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return new LoginScreenState();
+  LoginScreenState createState() => new LoginScreenState();
   }
-}
+
 
 class LoginScreenState extends State<LoginScreen>
     implements LoginScreenContract, AuthStateListener {
@@ -20,7 +18,7 @@ class LoginScreenState extends State<LoginScreen>
   bool _isLoading = false;
   final formKey = new GlobalKey<FormState>();
   final scaffoldKey = new GlobalKey<ScaffoldState>();
-  String _password, _password;
+  String _username, _password;
 
   LoginScreenPresenter _presenter;
 
@@ -75,9 +73,9 @@ class LoginScreenState extends State<LoginScreen>
                 child: new TextFormField(
                   onSaved: (val) => _username = val,
                   validator: (val) {
-                    return val.length < 10
-                        ? "Username must have atleast 10 chars"
-                        : null;
+                     return val.length < 3
+                        ? "Username must have atleast 3 chars"
+                        : null; 
                   },
                   decoration: new InputDecoration(labelText: "Username"),
                 ),
@@ -101,11 +99,11 @@ class LoginScreenState extends State<LoginScreen>
       appBar: null,
       key: scaffoldKey,
       body: new Container(
-        decoration: new BoxDecoration(
+        /* decoration: new BoxDecoration(
           image: new DecorationImage(
               image: new AssetImage("assets/login_background.jpg"),
               fit: BoxFit.cover),
-        ),
+        ), */
         child: new Center(
           child: new ClipRect(
             child: new BackdropFilter(
@@ -123,17 +121,21 @@ class LoginScreenState extends State<LoginScreen>
       ),
     );
   }
-
+ 
   @override
-  void onLoginError(String errorTxt) {
+  void onLogginError(String errorTxt) {
+    // TODO: implement onLogginError
     _showSnackBar(errorTxt);
     setState(() => _isLoading = false);
   }
 
   @override
-  void onLoginSuccess(User user) async {
-    _showSnackBar(user.toString());
-    setState(() => _isLoading = false);
+  void onLogginSuccess(User user) async {
+    // TODO: implement onLogginSuccess
+     _showSnackBar(user.toString());
+    setState(() {
+        _isLoading = false;
+    } );
     var db = new DatabaseHelper();
     await db.saveUser(user);
     var authStateProvider = new AuthStateProvider();

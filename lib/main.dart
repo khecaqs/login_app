@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login_app/auth.dart';
+//import 'package:login_app/auth.dart';
 import 'package:login_app/routes.dart';
 
 void main() => runApp(new LoginApp());

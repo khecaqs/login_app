@@ -12,8 +12,9 @@ class LoginScreenPresenter {
 
   LoginScreenPresenter(this._view);
   doLogin(String username, String password) {
-    api.login(username, password).then((User user){
+    api
+    .login(username, password).then((User user){
       _view.onLogginSuccess(user);
-    }).catchError((Exception error)=> _view.onLogginError(error.toString()));
+    }).catchError((Exception error) => _view.onLogginError(error.toString()));
   }
 }

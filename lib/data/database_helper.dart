@@ -10,6 +10,7 @@ import 'package:path_provider/path_provider.dart';
 class DatabaseHelper {
   static final DatabaseHelper _instance = new DatabaseHelper.internal();
   factory DatabaseHelper() => _instance;
+  
   static Database _db;
 
   Future<Database> get db async {
@@ -20,11 +21,15 @@ class DatabaseHelper {
   }
 
   DatabaseHelper.internal();
+
   initDB() async {
     io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    print(getApplicationDocumentsDirectory());
     String path = join(documentsDirectory.path,"main.db");
 
     var theDB = await openDatabase(path, version: 1, onCreate: _onCreate);
+
+    print("database connect");
     return theDB;
   }
   
