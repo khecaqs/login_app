@@ -73,7 +73,7 @@ class LoginScreenState extends State<LoginScreen>
                 child: new TextFormField(
                   onSaved: (val) => _username = val,
                   validator: (val) {
-                     return val.length < 3
+                     return val.length < 1
                         ? "Username must have atleast 3 chars"
                         : null; 
                   },
@@ -136,9 +136,11 @@ class LoginScreenState extends State<LoginScreen>
     setState(() {
         _isLoading = false;
     } );
+
     var db = new DatabaseHelper();
     await db.saveUser(user);
     var authStateProvider = new AuthStateProvider();
-    authStateProvider.notify(AuthState.LOGGED_IN);
-  }
+    authStateProvider.notify(AuthState.LOGGED_IN); 
+
+    }
 }

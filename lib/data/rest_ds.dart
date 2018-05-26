@@ -9,8 +9,8 @@ class RestDataSource {
   static final LOGIN_URL = BASE_URL + "/login.php";
   static final _API_KEY = "somerandomkey"; */
 
-  static final BASE_URL = "";
-  static final LOGIN_URL = BASE_URL + "/";
+  static final Base_Url = "http://192.168.1.2/dbapps";
+  static final Login_Url = Base_Url + "/index.php";
 //  static final _API_KEY = "somerandomkey"; 
  
   //static final BASE_URL = "http://mam.epizy.com/todo/";
@@ -26,9 +26,7 @@ Future<User> login(String username, String password) {
 
  
   Future<User> login(String username, String password) {
-    
-    //return _netUtil.post(LOGIN_URL, body: {
-    return _netUtil.post(LOGIN_URL, body: {
+    return _netUtil.post(Login_Url, body: {
      // "token" : _API_KEY,
       "username" : username,
       "password" : password
@@ -39,3 +37,4 @@ Future<User> login(String username, String password) {
     });
   }
 }
+
